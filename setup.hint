@@ -1,6 +1,0 @@
-category: Archive
-requires: zlib0
-sdesc: "Parallel GZip de/compressor"
-ldesc: "pigz, which stands for parallel implementation of gzip, is a 
-fully functional replacement for gzip that exploits multiple processors 
-and multiple cores to the hilt when compressing data."
