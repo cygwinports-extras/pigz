@@ -1,5 +1,5 @@
 NAME="pigz"
-VERSION=2.1.6
+VERSION=2.3.1
 RELEASE=1
 CATEGORY="Archive"
 SUMMARY="Parallel GZip de/compressor"
@@ -13,12 +13,13 @@ SRC_URI="http://www.zlib.net/pigz/${NAME}-${VERSION}.tar.gz"
 src_compile() {
 	lndirs
 	cd ${B}
-	cygmake
+	cygmake CC=${CC} CFLAGS="${CFLAGS}"
 }
 
 src_install() {
 	cd ${B}
-	dobin *.exe
+	dobin pigz.exe
+	dosym pigz.exe /usr/bin/unpigz
 	doman *.1
 	dodoc *.pdf
 }
