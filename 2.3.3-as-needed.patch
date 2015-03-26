@@ -1,0 +1,35 @@
+Revert of upstream commit https://github.com/madler/pigz/commit/28d11df
+
+--- origsrc/pigz-2.3.3/Makefile	2015-01-19 22:12:31.000000000 -0600
++++ src/pigz-2.3.3/Makefile	2015-03-26 17:16:00.256775500 -0500
+@@ -1,11 +1,10 @@
+ CC=cc
+ CFLAGS=-O3 -Wall -Wextra
+-LDFLAGS=-lz
+ ZOPFLI=zopfli/src/zopfli/
+ # use gcc and gmake on Solaris
+ 
+ pigz: pigz.o yarn.o try.o ${ZOPFLI}deflate.o ${ZOPFLI}blocksplitter.o ${ZOPFLI}tree.o ${ZOPFLI}lz77.o ${ZOPFLI}cache.o ${ZOPFLI}hash.o ${ZOPFLI}util.o ${ZOPFLI}squeeze.o ${ZOPFLI}katajainen.o
+-	$(CC) $(LDFLAGS) -o pigz $^ -lpthread -lm
++	$(CC) $(LDFLAGS) -o pigz $^ -lpthread -lz -lm
+ 	ln -f pigz unpigz
+ 
+ pigz.o: pigz.c yarn.h try.h ${ZOPFLI}deflate.h ${ZOPFLI}util.h
+@@ -35,7 +34,7 @@ ${ZOPFLI}katajainen.o: ${ZOPFLI}katajain
+ dev: pigz pigzt pigzn
+ 
+ pigzt: pigzt.o yarnt.o try.o ${ZOPFLI}deflate.o ${ZOPFLI}blocksplitter.o ${ZOPFLI}tree.o ${ZOPFLI}lz77.o ${ZOPFLI}cache.o ${ZOPFLI}hash.o ${ZOPFLI}util.o ${ZOPFLI}squeeze.o ${ZOPFLI}katajainen.o
+-	$(CC) $(LDFLAGS) -o pigzt $^ -lpthread -lm
++	$(CC) $(LDFLAGS) -o pigzt $^ -lpthread -lz -lm
+ 
+ pigzt.o: pigz.c yarn.h try.h
+ 	$(CC) $(CFLAGS) -DDEBUG -g -c -o pigzt.o pigz.c
+@@ -44,7 +43,7 @@ yarnt.o: yarn.c yarn.h
+ 	$(CC) $(CFLAGS) -DDEBUG -g -c -o yarnt.o yarn.c
+ 
+ pigzn: pigzn.o tryn.o ${ZOPFLI}deflate.o ${ZOPFLI}blocksplitter.o ${ZOPFLI}tree.o ${ZOPFLI}lz77.o ${ZOPFLI}cache.o ${ZOPFLI}hash.o ${ZOPFLI}util.o ${ZOPFLI}squeeze.o ${ZOPFLI}katajainen.o
+-	$(CC) $(LDFLAGS) -o pigzn $^ -lm
++	$(CC) $(LDFLAGS) -o pigzn $^ -lz -lm
+ 
+ pigzn.o: pigz.c try.h
+ 	$(CC) $(CFLAGS) -DDEBUG -DNOTHREAD -g -c -o pigzn.o pigz.c

@@ -1,14 +1,14 @@
 NAME="pigz"
-VERSION=2.3.1
+VERSION=2.3.3
 RELEASE=1
 CATEGORY="Archive"
 SUMMARY="Parallel GZip de/compressor"
 DESCRIPTION="pigz, which stands for parallel implementation of gzip, is a fully
 functional replacement for gzip that exploits multiple processors and multiple
 cores to the hilt when compressing data."
-DESCRIPTION="Parallel GZip de/compressor"
 HOMEPAGE="http://www.zlib.net/pigz/"
 SRC_URI="http://www.zlib.net/pigz/${NAME}-${VERSION}.tar.gz"
+PATCH_URI="2.3.3-as-needed.patch"
 
 src_compile() {
 	lndirs
